@@ -346,7 +346,7 @@ lemma epsilon_list_length {L : List S} : epsilon m L = μ₂.gen ^ L.length := b
           rw [epsilon_mul]
         _ = μ₂.gen * epsilon m L0 := by
           rw [epsilon_S]
-    rw [h2, ih, pow_succ μ₂.gen L0.length]
+    rw [h2, ih, pow_succ μ₂.gen L0.length, mul_comm]
 
 lemma epsilon_length {g : G} : epsilon m g = μ₂.gen ^ ℓ(g) := by
   let ⟨L, h1, h2⟩ := Nat.find_spec (@length_aux G _ S _ g)
@@ -1015,8 +1015,8 @@ lemma pi_aux_list_mul (s t : α) : ((pi_aux' s : Equiv.Perm R) * (pi_aux' t : Eq
       List.prod_nil]
   . rw [Nat.succ_eq_add_one, pow_succ, mul_add, add_comm, mul_one,
       alternating_word_append_even s t (2 + 2 * k) (2) (by norm_num) (by norm_num)]
-    simp only [add_tsub_cancel_left, List.map_append, List.prod_append, ← ih, mul_left_inj]
-    rfl
+    simp only [add_tsub_cancel_left, List.map_append, List.prod_append, ← ih]
+    sorry
 
 lemma alternating_word_map (s t : α) (f : α → A) (n : ℕ) :
   (alternating_word s t n).map f = alternating_word (f s) (f t) n := by
@@ -1122,7 +1122,7 @@ lemma pi_inj : Function.Injective (pi : G → Equiv.Perm R) := by
   have L_rev_ge1 : L.reverse.length > 0 := List.length_pos.mpr L_rev_notempty
   have : pi w ≠ 1 := by
     let s := L.getLast L_notempty
-    let t : T := ⟨s, SimpleRefl_subset_Refl (Subtype.mem s)⟩
+    let t : T := ⟨s, SimpleRefl_is_Refl (Subtype.mem s)⟩
     have : nn L.reverse t = 1 := by
       have zero_works : (toPalindrome_i L.reverse 0).gprod = [s] := by
         rw [toPalindrome_i, reverse_head L L_notempty]
@@ -1417,7 +1417,7 @@ lemma strong_exchange : ∀ (L : List S) (t : T), ℓ((t:G) * L) < ℓ(L) →
 
 lemma exchange: OrderTwoGen.ExchangeProp S := by
   intro L t _ h2
-  obtain ⟨i, hi⟩ := strong_exchange L ⟨t.val, (OrderTwoGen.SimpleRefl_subset_Refl t.prop)⟩ (length_smul_lt_of_le h2)
+  obtain ⟨i, hi⟩ := strong_exchange L ⟨t.val, (OrderTwoGen.SimpleRefl_is_Refl t.prop)⟩ (length_smul_lt_of_le h2)
   exact ⟨i, hi⟩
 
 -- DLevel 3

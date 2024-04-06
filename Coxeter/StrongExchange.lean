@@ -13,10 +13,7 @@ def of_eq  {x:α} : of m x  = (PresentedGroup.of x :toGroup m) := by rfl
 
 end CoxeterMatrix
 
-
 noncomputable section
-
-
 
 namespace CoxeterSystem
 
