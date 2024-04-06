@@ -1,5 +1,6 @@
 import Std.Data.Fin.Basic
 import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Ring
 import Mathlib.Data.List.Basic
 import Mathlib.Data.Subtype
 import Mathlib.Data.Set.Basic
@@ -129,10 +130,7 @@ lemma take_drop_get {α : Type _} (L: List α) (n : ℕ) (h : n < L.length):
 
 @[simp]
 lemma drop_take_nil {α : Type _} {L : List α} {n : ℕ} : (L.take n).drop n = [] := by
-  have h := drop_take n 0 L
-  simp only [add_zero, take] at h
-  exact h
-
+  simp [drop_take n n L]
 
 -- DLevel 2
 lemma take_get_lt {α : Type _} (L: List α) (n : ℕ) (h : n < L.length) :
@@ -603,7 +601,7 @@ lemma mem_monoid_closure_iff_prod {M : Type*} [Monoid M] (T : Set M) (z : M) :
   z ∈ closure T ↔ (∃ L : List T, z = (L : List M).prod) := by
     constructor
     . intro hz ; induction' hz using closure_induction' with s hs x _ y _ hx hy x _ hx
-      . use [⟨s,hs⟩]; simp [List.prod_singleton,pure,List.ret]
+      . use [⟨s,hs⟩]; simp [List.prod_singleton,pure, List.pure]
       . use []; simp [List.prod_nil]
       . obtain ⟨Lx,hLx⟩ := hx
         obtain ⟨Ly,hLy⟩ := hy
