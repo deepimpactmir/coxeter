@@ -45,8 +45,8 @@ lemma aux_symm_of_power {f : S → M} {s s' :S } : (f s * f s')^orderOf ((s :G) 
 def mapLift {f : S → M} (h : ∀ s s', (f s * f s')^orderOf ((s :G) * s') = 1) :
   G →* M where
     toFun := fun w => List.prod <| (choose_reduced_word S w).map f
-    map_one' := by sorry
-    map_mul' := by sorry
+    map_one' := sorry
+    map_mul' := sorry
 
 lemma mapLift.of {f : S → M} {h : ∀ s s', (f s * f s')^orderOf ((s :G) * s') = 1} (s:S) :
   mapLift h s = f s := by sorry
@@ -160,8 +160,6 @@ theorem _root_.CoxeterSystem.strong_exchange : ∀ (L : List S) (t : Refl S), �
   set L' :=  L.map equiv.SimpleRefl
   have hl0 :L'.length = L.length := by rw [List.length_map]
   set t' := equiv.Refl t
-  have hl1 : ℓ'(t'.val * L') = ℓ(t.val * L) := by sorry
-  have hl2 : ℓ'(L') = ℓ(L) := by sorry
   have hl' : ℓ'(t'.val * L') < ℓ'(L') := by sorry
   obtain ⟨i, hi⟩:= CoxeterMatrix.strong_exchange L' t' hl'
   let i' : Fin L.length := ⟨i.val, by simp_rw [<-hl0,i.prop]⟩

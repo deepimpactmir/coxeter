@@ -1165,9 +1165,6 @@ lemma eta_t (t : T) : eta (t : G) t = μ₂.gen := by
             add_comm 1 L.length, ← Nat.sub_sub, Nat.add_sub_cancel]
           exact Nat.sub_sub_self (by linarith [x.2])
         simp only [this]
-        have : x.1 < L.reverse.reverse.length := by
-          rw [List.reverse_reverse]
-          exact x.2
         congr 1
         · exact List.reverse_reverse L
         · exact (Fin.heq_ext_iff (by rw [List.reverse_reverse L])).mpr rfl
