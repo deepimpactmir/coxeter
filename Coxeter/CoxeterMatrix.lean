@@ -14,13 +14,9 @@ import Coxeter.OrderTwoGen
 import Coxeter.AlternatingWord
 
 open BigOperators
-
--- open Classical
--- test222
-
 section
-variable {α : Type*} [DecidableEq α]
 
+variable {α : Type*} [DecidableEq α]
 variable (m : Matrix α α ℕ)
 
 class CoxeterMatrix : Prop where
@@ -29,11 +25,9 @@ class CoxeterMatrix : Prop where
 end
 
 open Classical
-
 namespace CoxeterMatrix
-variable {α} (m : Matrix α α ℕ) [hm : CoxeterMatrix m]
 
---variable {m' : Matrix α α ℕ} [hm' : CoxeterMatrix m']
+variable {α : Type*} (m : Matrix α α ℕ) [hm : CoxeterMatrix m]
 
 lemma one_iff : ∀ (a b : α), m a b = 1 ↔ a = b := hm.oneIff
 
@@ -606,10 +600,9 @@ lemma nn_cons (L : List S) (s : S) (t : T) : nn (s :: L) t = (if (s : G) = t the
         rw [List.tail_append_of_ne_nil _ _]
         simp only [gprod_simps]
         repeat rw [← mul_assoc]
-        sorry
+        · sorry
         sorry
         --rw [mul_assoc _ s.1 s.1, gen_square_eq_one s.1 s.2, one_mul, mul_one]
-        --exact (List.append_singleton_ne_nil (ttail.take i).reverse th)
     _ = _ := by
       congr
       rw [List.count_singleton']
@@ -879,6 +872,8 @@ lemma pi_aux_list_mul (s t : α) : ((pi_aux' s : Equiv.Perm R) * (pi_aux' t : Eq
   . rw [Nat.succ_eq_add_one, pow_succ, mul_add, add_comm, mul_one,
       alternating_word_append_even s t (2 + 2 * k) (2) (by norm_num) (by norm_num)]
     simp only [add_tsub_cancel_left, List.map_append, List.prod_append, ← ih]
+    rw [← mul_assoc]
+
     sorry
 
 -- DLevel 3

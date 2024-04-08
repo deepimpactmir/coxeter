@@ -311,7 +311,8 @@ lemma length_muls_of_mem_leftDescent  (h : w ≠ 1) (s : leftDescent w) : ℓ(s*
 
 lemma length_muls_of_mem_rightDescent  (h : w ≠ 1) (s : rightDescent w) : ℓ(w*s) = ℓ(w) - 1 :=sorry
 
-lemma muls_twice (w:G) (s:hG.S) : w*s*s = w := sorry
+lemma muls_twice (w : G) (s : hG.S) : w * s * s = w := by
+  simp [mul_assoc]
 
 lemma smul_eq_muls_of_length_eq (s t:hG.S) (w:G) :ℓ(s*w*t) = ℓ(w) ∧ ℓ(s*w)=ℓ(w*t) → s*w=w*t:= sorry
 
